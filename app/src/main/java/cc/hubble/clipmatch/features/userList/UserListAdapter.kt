@@ -10,11 +10,20 @@ import cc.hubble.clipmatch.databinding.ItemUserBinding
 import cc.hubble.clipmatch.features.userList.UserListAdapter.UserViewHolder
 import com.bumptech.glide.Glide
 
-class UserListAdapter() : ListAdapter<User, UserViewHolder>(UserDiff) {
+class UserListAdapter(
+    private val onItemClicked: (User) -> Unit,
+) : ListAdapter<User, UserViewHolder>(UserDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val viewHolder = UserViewHolder(ItemUserBinding.inflate(layoutInflater, parent, false))
+        val itemUserBinding = ItemUserBinding.inflate(layoutInflater, parent, false)
+        val viewHolder = UserViewHolder(itemUserBinding).apply {
+            itemView.setOnClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    onItemClicked(getItem(adapterPosition))
+                }
+            }
+        }
 
         return viewHolder
     }

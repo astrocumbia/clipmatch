@@ -18,6 +18,9 @@ class UserListViewModel @Inject constructor(
     private val _state = MutableLiveData<ViewState>()
     val state: LiveData<ViewState> = _state
 
+    private val _event = MutableLiveData<Event>()
+    val event: LiveData<Event> = _event
+
     fun getUsersList() {
         viewModelScope.launch {
             val users  = repo.getUsers()
@@ -25,8 +28,17 @@ class UserListViewModel @Inject constructor(
         }
     }
 
+    fun onUserSelected(user: User) {
+        _event.value = Event.ShowUserDetails(user = user)
+    }
+
     // states
     sealed class ViewState {
         data class UserList(val users: List<User>): ViewState()
+    }
+
+    // Events
+    sealed class Event {
+        data class ShowUserDetails(val user:User): Event()
     }
 }
