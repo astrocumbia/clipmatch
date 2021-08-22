@@ -1,14 +1,15 @@
 package cc.hubble.clipmatch.features.userList
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import cc.hubble.clipmatch.R
 import cc.hubble.clipmatch.data.model.User
 import cc.hubble.clipmatch.databinding.FragmentUserListBinding
+import cc.hubble.clipmatch.features.userDetail.UserDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -49,7 +50,7 @@ class UserListFragment : Fragment() {
         }
     }
 
-    private fun handleEvent(event: UserListViewModel.Event) {
+    private fun handleEvent(event: UserListViewModel.Event?) {
         when (event) {
             is UserListViewModel.Event.ShowUserDetails -> showUserList(event.user)
         }
@@ -60,8 +61,16 @@ class UserListFragment : Fragment() {
     }
 
     private fun showUserList(user: User) {
-        // TODO: move to detail
-        Log.e("showUserList", "${user.name}")
+        viewModel.clearUserSelected()
+
+        // TODO: change for navigation
+        val fragment = UserDetailFragment()
+
+        parentFragmentManager.beginTransaction()
+            .setReorderingAllowed(true)
+            .addToBackStack(null)
+            .replace(R.id.fragment_container, fragment, "TTTAG")
+            .commit()
     }
 
     private fun configureRecyclerView() {
