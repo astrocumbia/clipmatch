@@ -18,8 +18,8 @@ class UserListViewModel @Inject constructor(
     private val _state = MutableLiveData<ViewState>()
     val state: LiveData<ViewState> = _state
 
-    private val _event = MutableLiveData<Event>()
-    val event: LiveData<Event> = _event
+    private val _event = MutableLiveData<Event?>()
+    val event: LiveData<Event?> = _event
 
     fun getUsersList() {
         viewModelScope.launch {
@@ -30,6 +30,10 @@ class UserListViewModel @Inject constructor(
 
     fun onUserSelected(user: User) {
         _event.value = Event.ShowUserDetails(user = user)
+    }
+
+    fun clearUserSelected() {
+        _event.value = null
     }
 
     // states
