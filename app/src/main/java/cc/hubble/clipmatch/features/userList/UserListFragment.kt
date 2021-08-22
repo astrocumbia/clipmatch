@@ -6,10 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import cc.hubble.clipmatch.R
+import androidx.navigation.fragment.findNavController
 import cc.hubble.clipmatch.data.model.User
 import cc.hubble.clipmatch.databinding.FragmentUserListBinding
-import cc.hubble.clipmatch.features.userDetail.UserDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -52,7 +51,7 @@ class UserListFragment : Fragment() {
 
     private fun handleEvent(event: UserListViewModel.Event?) {
         when (event) {
-            is UserListViewModel.Event.ShowUserDetails -> showUserList(event.user)
+            is UserListViewModel.Event.ShowUserDetails -> showUserDetail(event.user)
         }
     }
 
@@ -60,17 +59,13 @@ class UserListFragment : Fragment() {
         adapter.submitList(viewState.users)
     }
 
-    private fun showUserList(user: User) {
+    private fun showUserDetail(user: User) {
         viewModel.clearUserSelected()
 
-        // TODO: change for navigation
-        val fragment = UserDetailFragment()
+        val direction = UserListFragmentDirections
+            .actionUserListFragmentToUserDetailFragment(user)
 
-        parentFragmentManager.beginTransaction()
-            .setReorderingAllowed(true)
-            .addToBackStack(null)
-            .replace(R.id.fragment_container, fragment, "TTTAG")
-            .commit()
+        findNavController().navigate(direction)
     }
 
     private fun configureRecyclerView() {
