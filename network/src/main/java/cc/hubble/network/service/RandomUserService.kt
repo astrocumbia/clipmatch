@@ -8,7 +8,7 @@ interface RandomUserService {
 
     @GET("api/")
     suspend fun userList(
-        @Query("results") results: Int = 10,
+        @Query("results") results: Int = 100,
         @Query("page") page: Int = 1,
         @Query("seed") seed: String = "Cl1p",
     ): RandomUserListResponse
