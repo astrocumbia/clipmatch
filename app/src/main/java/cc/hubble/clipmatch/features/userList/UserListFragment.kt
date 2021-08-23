@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import cc.hubble.clipmatch.data.model.User
 import cc.hubble.clipmatch.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -51,7 +50,7 @@ class UserListFragment : Fragment() {
 
     private fun handleEvent(event: UserListViewModel.Event?) {
         when (event) {
-            is UserListViewModel.Event.ShowUserDetails -> showUserDetail(event.user)
+            is UserListViewModel.Event.ShowUserDetails -> showUserDetail(event.index)
         }
     }
 
@@ -59,19 +58,19 @@ class UserListFragment : Fragment() {
         adapter.submitList(viewState.users)
     }
 
-    private fun showUserDetail(user: User) {
+    private fun showUserDetail(index: Int) {
         viewModel.clearUserSelected()
 
         val direction = UserListFragmentDirections
-            .actionUserListFragmentToUserDetailFragment(user)
+            .actionUserListFragmentToUserDetailFragment(index)
 
         findNavController().navigate(direction)
     }
 
     private fun configureRecyclerView() {
         binding.userList.apply {
-            adapter = UserListAdapter { user ->
-                viewModel.onUserSelected(user)
+            adapter = UserListAdapter { index ->
+                viewModel.onUserSelected(index)
             }
 
             setHasFixedSize(true)

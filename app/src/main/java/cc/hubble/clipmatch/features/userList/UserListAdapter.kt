@@ -11,7 +11,7 @@ import cc.hubble.clipmatch.features.userList.UserListAdapter.UserViewHolder
 import com.bumptech.glide.Glide
 
 class UserListAdapter(
-    private val onItemClicked: (User) -> Unit,
+    private val onItemClicked: (Int) -> Unit,
 ) : ListAdapter<User, UserViewHolder>(UserDiff) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
@@ -20,7 +20,7 @@ class UserListAdapter(
         val viewHolder = UserViewHolder(itemUserBinding).apply {
             itemView.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    onItemClicked(getItem(adapterPosition))
+                    onItemClicked(adapterPosition)
                 }
             }
         }
@@ -38,17 +38,20 @@ class UserListAdapter(
     ): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: User) {
-            binding.itemName.text = user.name
+            binding.itemName.text = user.fullName
             binding.itemNationality.text = user.nationality
             binding.itemImage.clipToOutline = true
 
-            Glide.with(binding.root).load(user.thumbnail).into(binding.itemImage)
+            Glide.with(binding.root)
+                .load(user.thumbnail)
+                .circleCrop()
+                .into(binding.itemImage)
         }
     }
 
     object  UserDiff : DiffUtil.ItemCallback<User> () {
         override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
-            return oldItem.name == newItem.name
+            return oldItem.fullName == newItem.fullName
         }
 
         override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {

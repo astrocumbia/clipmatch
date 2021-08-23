@@ -1,7 +1,7 @@
 package cc.hubble.clipmatch.di
 
-import cc.hubble.clipmatch.data.RandomUsersRepository
-import cc.hubble.clipmatch.data.RandomUsersRepositoryImp
+import cc.hubble.clipmatch.data.repository.RandomUsersRepositoryImp
+import cc.hubble.clipmatch.data.repository.RandomUsersRepository
 import cc.hubble.network.RandomUserApiClient
 import cc.hubble.network.service.RandomUserService
 import dagger.Binds

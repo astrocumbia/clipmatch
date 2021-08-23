@@ -16,10 +16,9 @@
     <fragment
         android:id="@+id/userDetailFragment"
         android:name="cc.hubble.clipmatch.features.userDetail.UserDetailFragment"
-        android:label="fragment_user_detail"
-        tools:layout="@layout/fragment_user_detail" >
+        tools:layout="@layout/fragment_user_detail">
         <argument
-            android:name="userSelected"
-            app:argType="cc.hubble.clipmatch.data.model.User" />
+            android:name="index"
+            app:argType="integer" />
     </fragment>
 </navigation>
