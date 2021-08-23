@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import cc.hubble.clipmatch.data.model.Song
@@ -36,13 +37,7 @@ class UserDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         configureViewModel()
-//
-////
-////        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-////            title = user.name
-////            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-////            setElevation(0f)
-////        }
+
     }
 
     private fun configureViewModel() {
@@ -60,9 +55,16 @@ class UserDetailFragment : Fragment() {
         val song = viewState.favoriteSong
         val user = viewState.user
 
+        setupToolbar(user)
         setupImages(song, user)
         setupTextViews(song, user)
         setupChipGroup(viewState.hobbies)
+    }
+
+    private fun setupToolbar(user: User) {
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
+            title = user.fullName
+        }
     }
 
     private fun setupImages(song: Song, user: User) {
@@ -81,7 +83,7 @@ class UserDetailFragment : Fragment() {
         binding.textSong.text = song.name
         binding.textArtist.text = song.artist
 
-        binding.textName.text = user.fullName
+        binding.textName.text = user.firstName
         binding.textAge.text = user.age.toString()
         binding.textEmail.text = user.email
         binding.textPhone.text = user.phone
