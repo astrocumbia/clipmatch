@@ -11,7 +11,6 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/x3"
         android:layout_marginBottom="@dimen/x3"
-        android:background="@drawable/round_outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintStart_toStartOf="parent"

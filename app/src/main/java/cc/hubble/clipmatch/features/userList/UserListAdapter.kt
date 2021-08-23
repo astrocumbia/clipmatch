@@ -42,7 +42,10 @@ class UserListAdapter(
             binding.itemNationality.text = user.nationality
             binding.itemImage.clipToOutline = true
 
-            Glide.with(binding.root).load(user.thumbnail).into(binding.itemImage)
+            Glide.with(binding.root)
+                .load(user.thumbnail)
+                .circleCrop()
+                .into(binding.itemImage)
         }
     }
 
