@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import cc.hubble.clipmatch.data.model.User
 import cc.hubble.clipmatch.databinding.FragmentUserListBinding
 import dagger.hilt.android.AndroidEntryPoint
 

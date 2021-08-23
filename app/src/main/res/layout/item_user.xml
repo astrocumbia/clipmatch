@@ -3,46 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/item_image"
-        android:layout_width="80dp"
+        android:layout_width="60dp"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/x3"
+        android:layout_marginBottom="@dimen/x3"
         android:background="@drawable/round_outline"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toStartOf="@+id/item_name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription"
+        android:contentDescription="@string/profile_content_desc"
         tools:src="@tools:sample/avatars" />
 
-    <TextView
-        android:id="@+id/item_name"
+    <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginStart="@dimen/x2"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/item_image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/item_image"
+        app:layout_constraintTop_toTopOf="@+id/item_image">
+
+        <TextView
+            android:id="@+id/item_name"
+            style="@style/NameText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="UserName" />
+
+        <TextView
+            android:id="@+id/item_nationality"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Nationality" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#e7e7e7"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/item_image"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="UserName" />
-
-    <TextView
-        android:id="@+id/item_nationality"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:textAppearance="@style/TextAppearance.AppCompat.Caption"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintStart_toEndOf="@+id/item_image"
-        app:layout_constraintTop_toBottomOf="@+id/item_name"
-        tools:text="Nationality" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,7 +4,7 @@ import cc.hubble.network.model.User
 
 fun User.toModel(): cc.hubble.clipmatch.data.model.User {
     return cc.hubble.clipmatch.data.model.User(
-        fullName = "${name.title} ${name.first} ${name.last}",
+        fullName = "${name.first} ${name.last}",
         age = birthday.age,
         email = email,
         phone = phone,
