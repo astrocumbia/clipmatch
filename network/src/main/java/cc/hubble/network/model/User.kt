@@ -8,6 +8,7 @@ data class User(
     val email: String,
     @SerializedName("dob")
     val birthday: Birthday,
+    val location: Location,
     val phone: String,
     val cell: String,
     val picture: Picture,
